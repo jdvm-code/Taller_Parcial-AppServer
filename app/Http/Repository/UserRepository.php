@@ -7,6 +7,7 @@ use App\Mail\ConfirmAccount;
 use App\Models\User;
 use Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash as FacadesHash;
 use Mail;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -24,7 +25,7 @@ class UserRepository extends BaseRepository implements UserServices
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => Hash::make($request->password),
+                'password' => FacadesHash::make($request->password),
                 'remeber_token'=> $token,
                 'role_id'=>$request->role_id
             ]);

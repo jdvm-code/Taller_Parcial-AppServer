@@ -7,6 +7,7 @@ use App\Mail\ConfirmAccount;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail as FacadesMail;
 use Mail;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -23,7 +24,7 @@ class AuthController extends Controller
         try {
             $user =  $this->userService->store($request);
             $token = JWTAuth::fromUser($user);
-            Mail::to($user->email)->send(new ConfirmAccount($user));
+            FacadesMail::to($user->email)->send(new ConfirmAccount($user));
             return response()->json([
                 'success' => true,
                 'message' => 'User registered successfully',

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 #[Fillable(['name','short_name'])]
 #[Table('roles')]
+
 class Role extends Model
 {
     //
